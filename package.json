@@ -35,31 +35,86 @@
           "type": "renpy",
           "label": "Ren'Py: Run",
           "runtime": "renpy",
-          "languages": ["renpy"]
+          "languages": ["renpy"],
+          "configurationSnippets": [
+            {
+              "label": "Ren'Py: Run",
+              "description": "Runs the game.",
+              "body": {
+                "type": "renpy",
+                "request": "run",
+                "path": "${workspaceFolder}/game"
+              }
+            }
+          ]
         },
         {
           "type": "renpy",
           "label": "Ren'Py: Recompile & Run",
           "runtime": "renpy",
-          "languages": ["renpy"]
+          "languages": ["renpy"],
+          "configurationSnippets": [
+            {
+              "label": "Ren'Py: Recompile & Run",
+              "description": "Recompiles and runs the game.",
+              "body": {
+                "type": "renpy",
+                "request": "recompileandrun",
+                "path": "${workspaceFolder}/game"
+              }
+            }
+          ]
         },
         {
           "type": "renpy",
           "label": "Ren'Py: Delete Persistent",
           "runtime": "renpy",
-          "languages": ["renpy"]
+          "languages": ["renpy"],
+          "configurationSnippets": [
+            {
+              "label": "Ren'Py: Delete Persistent",
+              "description": "Deletes the persistent data.",
+              "body": {
+                "type": "renpy",
+                "request": "deletepersistent",
+                "path": "${workspaceFolder}/game"
+              }
+            }
+          ]
         },
         {
           "type": "renpy",
           "label": "Ren'Py: Lint",
           "runtime": "renpy",
-          "languages": ["renpy"]
+          "languages": ["renpy"],
+          "configurationSnippets": [
+            {
+              "label": "Ren'Py: Lint",
+              "description": "Lints the game.",
+              "body": {
+                "type": "renpy",
+                "request": "lint",
+                "path": "${workspaceFolder}/game"
+              }
+            }
+          ]
         },
         {
           "type": "renpy",
           "label": "Ren'Py: Distribute",
           "runtime": "renpy",
-          "languages": ["renpy"]
+          "languages": ["renpy"],
+          "configurationSnippets": [
+            {
+              "label": "Ren'Py: Distribute",
+              "description": "Distributes the game.",
+              "body": {
+                "type": "renpy",
+                "request": "distribute",
+                "path": "${workspaceFolder}/game"
+              }
+            }
+          ]
         }
       ]
     }
