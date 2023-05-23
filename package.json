@@ -14,12 +14,23 @@
   "activationEvents": [],
   "main": "./out/extension.ts",
   "contributes": {
-    "commands": [
-      {
-        "command": "renpy-vscode.helloWorld",
-        "title": "Hello World"
+    // https://code.visualstudio.com/api/references/contribution-points
+    "configuration": {
+      "title": "Ren'Py",
+      "properties": {
+        "renpy.renpySDKPath": {
+          "type": "string",
+          "default": false,
+          "description": "Ren'Py SDK folder path.",
+          "required": [
+            {
+              "when": "renpy.renpySDKPath",
+              "message": "Ren'Py SDK folder path is required."
+            }
+          ]
+        }
       }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
