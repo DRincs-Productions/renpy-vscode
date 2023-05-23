@@ -29,7 +29,39 @@
             }
           ]
         }
-      }
+      },
+      "debuggers": [
+        {
+          "type": "renpy",
+          "label": "Ren'Py: Run",
+          "runtime": "renpy",
+          "languages": ["renpy"]
+        },
+        {
+          "type": "renpy",
+          "label": "Ren'Py: Recompile & Run",
+          "runtime": "renpy",
+          "languages": ["renpy"]
+        },
+        {
+          "type": "renpy",
+          "label": "Ren'Py: Delete Persistent",
+          "runtime": "renpy",
+          "languages": ["renpy"]
+        },
+        {
+          "type": "renpy",
+          "label": "Ren'Py: Lint",
+          "runtime": "renpy",
+          "languages": ["renpy"]
+        },
+        {
+          "type": "renpy",
+          "label": "Ren'Py: Distribute",
+          "runtime": "renpy",
+          "languages": ["renpy"]
+        }
+      ]
     }
   },
   "scripts": {
