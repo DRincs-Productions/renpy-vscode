@@ -30,88 +30,57 @@
           ]
         }
       },
+      // https://code.visualstudio.com/api/extension-guides/debugger-extension
       "debuggers": [
         {
           "type": "renpy",
-          "label": "Ren'Py: Run",
+          "label": "Ren'Py Debug",
+
           "runtime": "renpy",
           "languages": ["renpy"],
+
+          "configurationAttributes": {
+            "launch": {
+              "required": [],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "default": "${workspaceFolder}/game",
+                  "description": "Path to the game folder."
+                },
+                "recompile": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Recompile the game before running."
+                }
+              }
+            }
+          },
+
+          "initialConfigurations": [
+            {
+              "type": "renpy",
+              "path": "${workspaceFolder}/game",
+              "recompile": true
+            }
+          ],  
+
           "configurationSnippets": [
             {
               "label": "Ren'Py: Run",
-              "description": "Runs the game.",
+              "description": "Run the game.",
               "body": {
                 "type": "renpy",
-                "request": "run",
                 "path": "${workspaceFolder}/game"
               }
-            }
-          ]
-        },
-        {
-          "type": "renpy",
-          "label": "Ren'Py: Recompile & Run",
-          "runtime": "renpy",
-          "languages": ["renpy"],
-          "configurationSnippets": [
+            },
             {
               "label": "Ren'Py: Recompile & Run",
-              "description": "Recompiles and runs the game.",
+              "description": "Recompile and run the game.",
               "body": {
                 "type": "renpy",
-                "request": "recompileandrun",
-                "path": "${workspaceFolder}/game"
-              }
-            }
-          ]
-        },
-        {
-          "type": "renpy",
-          "label": "Ren'Py: Delete Persistent",
-          "runtime": "renpy",
-          "languages": ["renpy"],
-          "configurationSnippets": [
-            {
-              "label": "Ren'Py: Delete Persistent",
-              "description": "Deletes the persistent data.",
-              "body": {
-                "type": "renpy",
-                "request": "deletepersistent",
-                "path": "${workspaceFolder}/game"
-              }
-            }
-          ]
-        },
-        {
-          "type": "renpy",
-          "label": "Ren'Py: Lint",
-          "runtime": "renpy",
-          "languages": ["renpy"],
-          "configurationSnippets": [
-            {
-              "label": "Ren'Py: Lint",
-              "description": "Lints the game.",
-              "body": {
-                "type": "renpy",
-                "request": "lint",
-                "path": "${workspaceFolder}/game"
-              }
-            }
-          ]
-        },
-        {
-          "type": "renpy",
-          "label": "Ren'Py: Distribute",
-          "runtime": "renpy",
-          "languages": ["renpy"],
-          "configurationSnippets": [
-            {
-              "label": "Ren'Py: Distribute",
-              "description": "Distributes the game.",
-              "body": {
-                "type": "renpy",
-                "request": "distribute",
-                "path": "${workspaceFolder}/game"
+                "path": "${workspaceFolder}/game",
+                "recompile": true
               }
             }
           ]
