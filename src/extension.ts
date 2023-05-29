@@ -3,6 +3,9 @@
 import * as vscode from 'vscode';
 import { extensions } from 'vscode';
 
+// https://code.visualstudio.com/api/references/contribution-points
+// https://code.visualstudio.com/api/extension-guides/debugger-extension
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -17,6 +20,9 @@ export function activate(context: vscode.ExtensionContext) {
 	// import renpy-languague extension
 	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
 	let renpyLanguageApi = renpyLanguage?.exports;
+
+	// Add a path to the Python environment
+	pythonApi.setExecutionDetails('python', { path: '/path/to/renpy/library' });
 
 }
 

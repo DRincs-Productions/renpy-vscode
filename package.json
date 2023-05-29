@@ -14,7 +14,6 @@
   "activationEvents": [],
   "main": "./out/extension.ts",
   "contributes": {
-    // https://code.visualstudio.com/api/references/contribution-points
     "configuration": {
       "title": "Ren'Py",
       "properties": {
@@ -30,7 +29,6 @@
           ]
         }
       },
-      // https://code.visualstudio.com/api/extension-guides/debugger-extension
       "debuggers": [
         {
           "type": "renpy",
