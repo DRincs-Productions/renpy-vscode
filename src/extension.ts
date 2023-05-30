@@ -13,6 +13,8 @@ export function activate(context: vscode.ExtensionContext) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log("Ren'Py VSCode extension activated!");
+
+	let settings = vscode.workspace.getConfiguration('renpy-vscode');
 	
 	// import python extension
 	let python = extensions.getExtension('ms-python.python');
@@ -21,8 +23,16 @@ export function activate(context: vscode.ExtensionContext) {
 	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
 	let renpyLanguageApi = renpyLanguage?.exports;
 
-	// Add a path to the Python environment
-	pythonApi.setExecutionDetails('python', { path: '/path/to/renpy/library' });
+	let renpySDKPath: string | undefined = settings.get("renpy.renpySDKPath");
+	if (!renpySDKPath)
+	{
+		vscode.window.showErrorMessage("The setting 'renpy.renpySDKPath' has not been set");
+	}
+	else
+	{
+		// Add a path to the Python environment
+		pythonApi.setExecutionDetails('python', { path: renpySDKPath });
+	}
 
 }
 
