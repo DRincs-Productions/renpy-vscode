@@ -3,15 +3,22 @@
   "displayName": "Ren'Py",
   "description": "Extension for VSCode designed for Ren'Py developers",
   "version": "0.0.1",
-  "publisher": "drincs-productions",
+  "publisher": "DRincs-Productions",
   "repository": "https://github.com/DRincs-Productions/renpy-vscode",
+  "homepage": "https://github.com/DRincs-Productions/renpy-vscode",
   "engines": {
     "vscode": "^1.77.0"
   },
+  "bugs": {
+    "url": "https://github.com/DRincs-Productions/renpy-vscode/issues"
+  },
   "categories": [
-    "Other"
+    "Programming Languages",
+    "Debuggers"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "workspaceContains:**/*.rpy"
+  ],
   "main": "./out/extension.ts",
   "contributes": {
     "configuration": {
