@@ -19,7 +19,7 @@
   "activationEvents": [
     "workspaceContains:**/*.rpy"
   ],
-  "main": "./out/extension.ts",
+  "main": "./out/extension",
   "contributes": {
     "configuration": {
       "title": "Ren'Py",
