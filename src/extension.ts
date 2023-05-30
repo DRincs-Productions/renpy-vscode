@@ -17,16 +17,17 @@ export function activate(context: vscode.ExtensionContext) {
 	let settings = vscode.workspace.getConfiguration('renpy-vscode');
 	let renpySDKPath: string | undefined = settings.get("renpy.renpySDKPath");
 
-	// import renpy-languague extension
+	// check if renpy language extension is installed
 	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
 	if (!renpyLanguage) {
 		vscode.window.showInformationMessage("The 'luquedaniel.languague-renpy' extension is recommended for syntax highlighting");
 	}
 
-	// import python extension
+	// check if python extension is installed
 	let python = extensions.getExtension('ms-python.python');
 	if (!python) {
-		vscode.window.showWarningMessage("The 'ms-python.python' extension is recommended for python files");
+		// TODO: check add ignore setting
+		vscode.window.showWarningMessage("The 'ms-python.python' extension is recommended for python files (you can ignore this message in the settings)");
 	}
 	else {
 		let pythonApi = python?.exports;
