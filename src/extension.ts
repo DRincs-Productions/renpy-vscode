@@ -16,29 +16,24 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let settings = vscode.workspace.getConfiguration('renpy-vscode');
 	let renpySDKPath: string | undefined = settings.get("renpy.renpySDKPath");
-	
+
 	// import renpy-languague extension
 	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
-	if (!renpyLanguage)
-	{
+	if (!renpyLanguage) {
 		vscode.window.showInformationMessage("The 'luquedaniel.languague-renpy' extension is recommended for syntax highlighting");
 	}
 
 	// import python extension
 	let python = extensions.getExtension('ms-python.python');
-	if (!python)
-	{
-		vscode.window.showErrorMessage("The 'ms-python.python' extension is required");
+	if (!python) {
+		vscode.window.showWarningMessage("The 'ms-python.python' extension is recommended for python files");
 	}
-	else
-	{
+	else {
 		let pythonApi = python?.exports;
-		if (!renpySDKPath)
-		{
+		if (!renpySDKPath) {
 			vscode.window.showErrorMessage("The setting 'renpy.renpySDKPath' has not been set");
 		}
-		else
-		{
+		else {
 			// Add a path to the Python environment
 			pythonApi.setExecutionDetails('python', { path: renpySDKPath });
 		}
@@ -46,4 +41,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }

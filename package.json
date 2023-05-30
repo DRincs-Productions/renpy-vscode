@@ -17,7 +17,8 @@
     "Debuggers"
   ],
   "activationEvents": [
-    "workspaceContains:**/*.rpy"
+    "workspaceContains:**/*.rpy",
+    "workspaceContains:**/*.py"
   ],
   "main": "./out/extension",
   "contributes": {
