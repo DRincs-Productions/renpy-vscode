@@ -17,6 +17,13 @@ export function activate(context: vscode.ExtensionContext) {
 	let settings = vscode.workspace.getConfiguration('renpy-vscode');
 	let renpySDKPath: string | undefined = settings.get("renpy.renpySDKPath");
 	
+	// import renpy-languague extension
+	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
+	if (!renpyLanguage)
+	{
+		vscode.window.showInformationMessage("The 'luquedaniel.languague-renpy' extension is recommended for syntax highlighting");
+	}
+
 	// import python extension
 	let python = extensions.getExtension('ms-python.python');
 	if (!python)
@@ -36,10 +43,6 @@ export function activate(context: vscode.ExtensionContext) {
 			pythonApi.setExecutionDetails('python', { path: renpySDKPath });
 		}
 	}
-
-	// import renpy-languague extension
-	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
-	let renpyLanguageApi = renpyLanguage?.exports;
 }
 
 // This method is called when your extension is deactivated
