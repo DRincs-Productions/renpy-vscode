@@ -25,7 +25,7 @@
     "configuration": {
       "title": "Ren'Py",
       "properties": {
-        "renpy.renpySDKPath": {
+        "renpy.sdkPath": {
           "type": [
             "string",
             "null"
@@ -34,7 +34,7 @@
           "description": "Ren'Py SDK folder path.",
           "required": [
             {
-              "when": "renpy.renpySDKPath",
+              "when": "renpy.sdkPath",
               "message": "Ren'Py SDK folder path is required."
             }
           ]
