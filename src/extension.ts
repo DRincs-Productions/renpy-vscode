@@ -47,13 +47,19 @@ function addAPathToThePythonEnvironment(sdkPath: string | undefined) {
 			pythonExtension.activate().then(() => {
 				const pythonApi: any = pythonExtension.exports //as IExtensionAPI;
 				// Add a path to the Python environment
-				pythonApi.setExecutionDetails('python', { path: sdkPath });
+				pythonApi.environments.updateActiveEnvironmentPath('renpy', sdkPath + "/renpy");
+				pythonApi.environments.refreshEnvironments().then(() => {
+					const environments = pythonApi.environments.known;
+				})
 			});
 		}
 		else {
 			const pythonApi: any = pythonExtension.exports //as IExtensionAPI;
 			// Add a path to the Python environment
-			pythonApi.setExecutionDetails('python', { path: sdkPath });
+			pythonApi.environments.updateActiveEnvironmentPath('renpy', sdkPath + "/renpy");
+			pythonApi.environments.refreshEnvironments().then(() => {
+				const environments = pythonApi.environments.known;
+			})
 		}
 	}
 	else {
