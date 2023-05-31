@@ -26,8 +26,11 @@
       "title": "Ren'Py",
       "properties": {
         "renpy.renpySDKPath": {
-          "type": "string",
-          "default": false,
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
           "description": "Ren'Py SDK folder path.",
           "required": [
             {
@@ -41,10 +44,10 @@
         {
           "type": "renpy",
           "label": "Ren'Py Debug",
-
           "runtime": "renpy",
-          "languages": ["renpy"],
-
+          "languages": [
+            "renpy"
+          ],
           "configurationAttributes": {
             "launch": {
               "required": [],
@@ -62,15 +65,13 @@
               }
             }
           },
-
           "initialConfigurations": [
             {
               "type": "renpy",
               "path": "${workspaceFolder}/game",
               "recompile": true
             }
-          ],  
-
+          ],
           "configurationSnippets": [
             {
               "label": "Ren'Py: Run",

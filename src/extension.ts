@@ -14,32 +14,50 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log("Ren'Py VSCode extension activated!");
 
-	let settings = vscode.workspace.getConfiguration('renpy-vscode');
-	let renpySDKPath: string | undefined = settings.get("renpy.renpySDKPath");
+	let settings = vscode.workspace.getConfiguration('renpy');
+	let renpySDKPath: string | undefined = settings.get("renpySDKPath");
+
+	// Add a path to the Python environment
+	addAPathToThePythonEnvironment(renpySDKPath);
 
 	// check if renpy language extension is installed
 	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
 	if (!renpyLanguage) {
 		vscode.window.showInformationMessage("The 'luquedaniel.languague-renpy' extension is recommended for syntax highlighting");
 	}
-
-	// check if python extension is installed
-	let python = extensions.getExtension('ms-python.python');
-	if (!python) {
-		// TODO: check add ignore setting
-		vscode.window.showWarningMessage("The 'ms-python.python' extension is recommended for python files (you can ignore this message in the settings)");
-	}
-	else {
-		let pythonApi = python?.exports;
-		if (!renpySDKPath) {
-			vscode.window.showErrorMessage("The setting 'renpy.renpySDKPath' has not been set");
-		}
-		else {
-			// Add a path to the Python environment
-			pythonApi.setExecutionDetails('python', { path: renpySDKPath });
-		}
-	}
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() { }
+
+/**
+ * Add a path to the Python environment
+ * @param renpySDKPath 
+ * @returns 
+ */
+function addAPathToThePythonEnvironment(renpySDKPath: string | undefined) {
+	if (!renpySDKPath) {
+		vscode.window.showErrorMessage("The setting 'renpy.renpySDKPath' has not been set");
+		return
+	}
+
+	const pythonExtension = extensions.getExtension('ms-python.python');
+	if (pythonExtension) {
+		if (!pythonExtension.isActive) {
+			pythonExtension.activate().then(() => {
+				const pythonApi: any = pythonExtension.exports //as IExtensionAPI;
+				// Add a path to the Python environment
+				pythonApi.setExecutionDetails('python', { path: renpySDKPath });
+			});
+		}
+		else {
+			const pythonApi: any = pythonExtension.exports //as IExtensionAPI;
+			// Add a path to the Python environment
+			pythonApi.setExecutionDetails('python', { path: renpySDKPath });
+		}
+	}
+	else {
+		// TODO: check add ignore setting
+		vscode.window.showWarningMessage("The 'ms-python.python' extension is recommended for python files (you can ignore this message in the settings)");
+	}
+}
