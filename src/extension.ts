@@ -18,7 +18,14 @@ export function activate(context: vscode.ExtensionContext) {
 	let sdkPath: string | undefined = settings.get("sdkPath");
 
 	// Add a path to the Python environment
-	addAPathToThePythonEnvironment(sdkPath);
+	if (sdkPath) {
+		context.environmentVariableCollection.append("renpy", sdkPath)
+		addAPathToThePythonEnvironment(sdkPath);
+	}
+	else {
+		context.environmentVariableCollection.clear()
+		vscode.window.showErrorMessage("The setting 'renpy.sdkPath' has not been set");
+	}
 
 	// check if renpy language extension is installed
 	let renpyLanguage = extensions.getExtension('luquedaniel.languague-renpy');
@@ -35,19 +42,14 @@ export function deactivate() { }
  * @param sdkPath 
  * @returns 
  */
-function addAPathToThePythonEnvironment(sdkPath: string | undefined) {
-	if (!sdkPath) {
-		vscode.window.showErrorMessage("The setting 'renpy.sdkPath' has not been set");
-		return
-	}
-
+function addAPathToThePythonEnvironment(sdkPath: string) {
 	const pythonExtension = extensions.getExtension('ms-python.python');
 	if (pythonExtension) {
 		if (!pythonExtension.isActive) {
 			pythonExtension.activate().then(() => {
 				const pythonApi: any = pythonExtension.exports //as IExtensionAPI;
 				// Add a path to the Python environment
-				pythonApi.environments.updateActiveEnvironmentPath('renpy', sdkPath + "/renpy");
+				pythonApi.environments.updateActiveEnvironmentPath("renpy");
 				pythonApi.environments.refreshEnvironments().then(() => {
 					const environments = pythonApi.environments.known;
 				})
@@ -56,7 +58,7 @@ function addAPathToThePythonEnvironment(sdkPath: string | undefined) {
 		else {
 			const pythonApi: any = pythonExtension.exports //as IExtensionAPI;
 			// Add a path to the Python environment
-			pythonApi.environments.updateActiveEnvironmentPath('renpy', sdkPath + "/renpy");
+			pythonApi.environments.updateActiveEnvironmentPath("renpy");
 			pythonApi.environments.refreshEnvironments().then(() => {
 				const environments = pythonApi.environments.known;
 			})
