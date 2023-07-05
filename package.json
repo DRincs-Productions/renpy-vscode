@@ -93,19 +93,24 @@
           ]
         }
       ],
-      // https://code.visualstudio.com/api/extension-guides/task-provider
       "taskDefinitions": [
         {
-            "type": "renpy",
-            "required": [
-                "task"
-            ],
-            "properties": {
-                "task": {
-                    "type": ["run", "compile", "rmpersistent", "lint", "distribute"],
-                    "description": "The Renpy task to customize"
-                }
+          "type": "renpy",
+          "required": [
+            "task"
+          ],
+          "properties": {
+            "task": {
+              "type": [
+                "run",
+                "compile",
+                "rmpersistent",
+                "lint",
+                "distribute"
+              ],
+              "description": "The Renpy task to customize"
             }
+          }
         }
       ]
     }
