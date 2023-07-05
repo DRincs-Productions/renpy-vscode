@@ -10,7 +10,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log("Ren'Py VSCode extension activated!");
-	
+
 	// import python extension
 	let python = extensions.getExtension('ms-python.python');
 	let pythonApi = python?.exports;
@@ -21,4 +21,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
