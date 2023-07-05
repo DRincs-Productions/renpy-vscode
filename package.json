@@ -3,42 +3,51 @@
   "displayName": "Ren'Py",
   "description": "Extension for VSCode designed for Ren'Py developers",
   "version": "0.0.1",
-  "publisher": "drincs-productions",
+  "publisher": "DRincs-Productions",
   "repository": "https://github.com/DRincs-Productions/renpy-vscode",
+  "homepage": "https://github.com/DRincs-Productions/renpy-vscode",
   "engines": {
     "vscode": "^1.77.0"
   },
+  "bugs": {
+    "url": "https://github.com/DRincs-Productions/renpy-vscode/issues"
+  },
   "categories": [
-    "Other"
+    "Programming Languages",
+    "Debuggers"
   ],
-  "activationEvents": [],
-  "main": "./out/extension.ts",
+  "activationEvents": [
+    "workspaceContains:**/*.rpy",
+    "workspaceContains:**/*.py"
+  ],
+  "main": "./out/extension",
   "contributes": {
-    // https://code.visualstudio.com/api/references/contribution-points
     "configuration": {
       "title": "Ren'Py",
       "properties": {
-        "renpy.renpySDKPath": {
-          "type": "string",
-          "default": false,
+        "renpy.sdkPath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
           "description": "Ren'Py SDK folder path.",
           "required": [
             {
-              "when": "renpy.renpySDKPath",
+              "when": "renpy.sdkPath",
               "message": "Ren'Py SDK folder path is required."
             }
           ]
         }
       },
-      // https://code.visualstudio.com/api/extension-guides/debugger-extension
       "debuggers": [
         {
           "type": "renpy",
           "label": "Ren'Py Debug",
-
           "runtime": "renpy",
-          "languages": ["renpy"],
-
+          "languages": [
+            "renpy"
+          ],
           "configurationAttributes": {
             "launch": {
               "required": [],
@@ -56,15 +65,13 @@
               }
             }
           },
-
           "initialConfigurations": [
             {
               "type": "renpy",
               "path": "${workspaceFolder}/game",
               "recompile": true
             }
-          ],  
-
+          ],
           "configurationSnippets": [
             {
               "label": "Ren'Py: Run",

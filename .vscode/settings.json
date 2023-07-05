@@ -1,5 +1,26 @@
 // Place your settings in this file to overwrite default and user settings.
 {
+    // Formatter
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+    // reorganise imports
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    // references
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    // does fetch when he does Pull
+    "git.fetchOnPull": true,
+    // move file
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    // out
     "files.exclude": {
         "out": false // set this to true to hide the "out" folder with the compiled JS files
     },
@@ -7,5 +28,9 @@
         "out": true // set this to false to include "out" folder in search results
     },
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-    "typescript.tsc.autoDetect": "off"
+    "typescript.tsc.autoDetect": "off",
+    // olther
+    "git.enableSmartCommit": true,
+    "extensions.ignoreRecommendations": false,
+    "diffEditor.ignoreTrimWhitespace": false,
 }
