@@ -1,4 +1,7 @@
 import * as vscode from 'vscode';
+import { Disposable } from '../utils/dispose';
+
+// https://code.visualstudio.com/api/extension-guides/task-provider
 
 class RenpyTaskDefinition implements vscode.TaskDefinition {
 	constructor(public task: string) {
@@ -8,52 +11,52 @@ class RenpyTaskDefinition implements vscode.TaskDefinition {
 	type: string = 'renpy'
 }
 
-// https://code.visualstudio.com/api/extension-guides/task-provider
-function getRenpyTasks(): Thenable<vscode.Task[]> {
-	return Promise.resolve([
-		new vscode.Task(
-			new RenpyTaskDefinition('run'),
-			vscode.TaskScope.Workspace,
-			'Run',
-			'renpy',
-		),
-		new vscode.Task(
-			new RenpyTaskDefinition('compile'),
-			vscode.TaskScope.Workspace,
-			'Re-Compile',
-			'renpy',
-		),
-		new vscode.Task(
-			new RenpyTaskDefinition('rmpersistent'),
-			vscode.TaskScope.Workspace,
-			'Delete Persistent',
-			'renpy',
-		),
-		new vscode.Task(
-			new RenpyTaskDefinition('lint'),
-			vscode.TaskScope.Workspace,
-			'Lint',
-			'renpy',
-		),
-		new vscode.Task(
-			new RenpyTaskDefinition('distribute'),
-			vscode.TaskScope.Workspace,
-			'Distribute',
-			'renpy',
-		),
-	]);
-}
+/**
+ * Provides tasks for building `tsconfig.json` files in a project.
+ */
+class RenpyTaskProvider extends Disposable implements vscode.TaskProvider {
+	public constructor() {
+		super();
+		this._register(vscode.workspace.onDidChangeConfiguration(this.onConfigurationChanged, this));
+		this.onConfigurationChanged();
+	}
 
+	public async provideTasks(token: vscode.CancellationToken): Promise<vscode.Task[]> {
+		return Promise.resolve([
+			new vscode.Task(
+				new RenpyTaskDefinition('run'),
+				vscode.TaskScope.Workspace,
+				'Run',
+				'renpy',
+			),
+			new vscode.Task(
+				new RenpyTaskDefinition('compile'),
+				vscode.TaskScope.Workspace,
+				'Re-Compile',
+				'renpy',
+			),
+			new vscode.Task(
+				new RenpyTaskDefinition('rmpersistent'),
+				vscode.TaskScope.Workspace,
+				'Delete Persistent',
+				'renpy',
+			),
+			new vscode.Task(
+				new RenpyTaskDefinition('lint'),
+				vscode.TaskScope.Workspace,
+				'Lint',
+				'renpy',
+			),
+			new vscode.Task(
+				new RenpyTaskDefinition('distribute'),
+				vscode.TaskScope.Workspace,
+				'Distribute',
+				'renpy',
+			),
+		]);
+	}
 
-let renpyPromise: Thenable<vscode.Task[]> | undefined = undefined;
-const taskProvider = vscode.tasks.registerTaskProvider('renpy', {
-	provideTasks: () => {
-		if (!renpyPromise) {
-			renpyPromise = getRenpyTasks();
-		}
-		return renpyPromise;
-	},
-	resolveTask(_task: vscode.Task): vscode.Task | undefined {
+	public async resolveTask(_task: vscode.Task): Promise<vscode.Task | undefined> {
 		if (!process.env.hasOwnProperty('RenPy')) {
 			vscode.window.showErrorMessage("Ren'Py SDK not found. Please set the environment variable RenPy to the path of your Ren'Py SDK.");
 			return undefined;
@@ -93,4 +96,13 @@ const taskProvider = vscode.tasks.registerTaskProvider('renpy', {
 		}
 		return undefined;
 	}
-});
+
+	private onConfigurationChanged(): void {
+		// const type = vscode.workspace.getConfiguration('typescript.tsc').get<AutoDetect>('autoDetect');
+		// this.autoDetect = typeof type === 'undefined' ? AutoDetect.on : type;
+	}
+}
+
+export function register() {
+	return vscode.tasks.registerTaskProvider('renpy', new RenpyTaskProvider());
+}
