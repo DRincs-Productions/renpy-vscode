@@ -18,7 +18,7 @@
   ],
   "activationEvents": [
     "workspaceContains:**/*.rpy",
-    "workspaceContains:**/*.py"
+    "onTaskType:renpy"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -101,13 +101,7 @@
           ],
           "properties": {
             "task": {
-              "type": [
-                "run",
-                "compile",
-                "rmpersistent",
-                "lint",
-                "distribute"
-              ],
+              "type": "string",
               "description": "The Renpy task to customize"
             }
           }

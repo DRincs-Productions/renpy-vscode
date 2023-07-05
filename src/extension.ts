@@ -14,6 +14,11 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log("Ren'Py VSCode extension activated!");
 
+	// register task provider
+	import('./task/taskProvider').then(module => {
+		context.subscriptions.push(module.register());
+	});
+
 	// let settings = vscode.workspace.getConfiguration('renpy');
 	// let sdkPath: string | undefined = settings.get("sdkPath");
 
