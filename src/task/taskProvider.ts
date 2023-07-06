@@ -103,6 +103,6 @@ class RenpyTaskProvider extends Disposable implements vscode.TaskProvider {
 	}
 }
 
-export function register() {
+export function registerTaskProvider() {
 	return vscode.tasks.registerTaskProvider('renpy', new RenpyTaskProvider());
 }

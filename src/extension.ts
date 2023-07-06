@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { extensions } from 'vscode';
+import { registerTaskProvider } from './task/taskProvider';
 
 // https://code.visualstudio.com/api/references/contribution-points
 // https://code.visualstudio.com/api/extension-guides/debugger-extension
@@ -15,9 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log("Ren'Py VSCode extension activated!");
 
 	// register task provider
-	import('./task/taskProvider').then(module => {
-		context.subscriptions.push(module.register());
-	});
+	context.subscriptions.push(registerTaskProvider());
 
 	// let settings = vscode.workspace.getConfiguration('renpy');
 	// let sdkPath: string | undefined = settings.get("sdkPath");
