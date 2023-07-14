@@ -1,3 +1,4 @@
 [submodule "src/server"]
 	path = src/server
 	url = https://github.com/DRincs-Productions/renpy-language-server
+	branch = only-server
