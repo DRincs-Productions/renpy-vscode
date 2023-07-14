@@ -2,9 +2,16 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { extensions } from 'vscode';
+import {
+	LanguageClient
+} from 'vscode-languageclient/node';
+import { startLanguageServer } from './lsp';
 
 // https://code.visualstudio.com/api/references/contribution-points
 // https://code.visualstudio.com/api/extension-guides/debugger-extension
+
+// https://code.visualstudio.com/api/language-extensions/language-server-extension-guide
+let client: LanguageClient;
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -32,10 +39,18 @@ export function activate(context: vscode.ExtensionContext) {
 	if (!renpyLanguage) {
 		vscode.window.showInformationMessage("The 'luquedaniel.languague-renpy' extension is recommended for syntax highlighting");
 	}
+
+	// start language server
+	startLanguageServer(context, client);
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() { }
+export function deactivate(): Thenable<void> | undefined {
+	if (!client) {
+		return undefined;
+	}
+	return client.stop();
+}
 
 /**
  * Add a path to the Python environment
